@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
+<%@ Page Language="VB" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web" TagPrefix="dx" %>
@@ -24,11 +24,10 @@
     <form id="form1" runat="server">
         <dx:ASPxGridView ID="grid" runat="server" AutoGenerateColumns="False" Width="100%" DataSourceID="dsUsers" KeyFieldName="ID" OnProcessColumnAutoFilter="grid_ProcessColumnAutoFilter">
             <Columns>
-                <dx:GridViewDataTextColumn FieldName="UserName" Caption="User Name" ReadOnly="true" VisibleIndex="1">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTokenBoxColumn FieldName="Roles" VisibleIndex="2">
+                <dx:GridViewDataTextColumn FieldName="UserName" Caption="User Name" ReadOnly="true" />
+                <dx:GridViewDataTokenBoxColumn FieldName="Roles" >
                     <Settings SortMode="DisplayText" FilterMode="DisplayText" />
-                    <PropertiesTokenBox DataSourceID="dsUserRoles" TextField="Name" ValueField="ID" AllowCustomTokens="false" IncrementalFilteringMode="Contains" ShowDropDownOnFocus="Always"></PropertiesTokenBox>
+                    <PropertiesTokenBox DataSourceID="dsUserRoles" TextField="Name" ValueField="ID" AllowCustomTokens="false" IncrementalFilteringMode="Contains" ShowDropDownOnFocus="Always" />
                     <FilterTemplate>
                         <dx:ASPxTokenBox ID="FilterTokenBox" ClientInstanceName="FilterTokenBox" Width="100%" runat="server" DataSourceID="dsUserRoles" TextField="Name" ValueField="ID" AllowCustomTokens="false" IncrementalFilteringMode="Contains" ShowDropDownOnFocus="Always">
                             <ClientSideEvents ValueChanged="OnValueChanged" />
@@ -36,7 +35,7 @@
                     </FilterTemplate>
                 </dx:GridViewDataTokenBoxColumn>
             </Columns>
-            <SettingsEditing EditFormColumnCount="1" Mode="EditForm"></SettingsEditing>
+            <SettingsEditing EditFormColumnCount="1" Mode="EditForm" />
             <Settings ShowFilterRow="true" />
             <ClientSideEvents EndCallback="OnEndCallback" />
         </dx:ASPxGridView>

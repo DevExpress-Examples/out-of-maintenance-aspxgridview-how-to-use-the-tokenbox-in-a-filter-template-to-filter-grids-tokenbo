@@ -8,29 +8,28 @@ Imports DevExpress.Data.Filtering
 Imports DevExpress.Web
 
 Partial Public Class _Default
-    Inherits System.Web.UI.Page
+	Inherits System.Web.UI.Page
 
-    Protected Sub grid_ProcessColumnAutoFilter(ByVal sender As Object, ByVal e As ASPxGridViewAutoFilterEventArgs)
-        If e.Column.FieldName <> "Roles" Then
-            Return
-        End If
+	Protected Sub grid_ProcessColumnAutoFilter(ByVal sender As Object, ByVal e As ASPxGridViewAutoFilterEventArgs)
+		If e.Column.FieldName <> "Roles" Then
+			Return
+		End If
+		If e.Kind = GridViewAutoFilterEventKind.CreateCriteria Then
+			If e.Value = "" Then
+				Return
+			End If
+			Dim values() As String = e.Value.Split(","c)
+			Dim criteria As String = String.Empty
 
-        If e.Kind = GridViewAutoFilterEventKind.CreateCriteria Then
-            If e.Value = "" Then
-                Return
-            End If
-            Dim values() As String = e.Value.Split(","c)
-            Dim criteria As String = String.Empty
-
-            Dim group As New GroupOperator()
-            group.OperatorType = GroupOperatorType.Or
-            For Each value As String In values
-                Dim leftOperand As String = e.Column.FieldName
-                Dim rightOperand As String = String.Format("%{0}%", value)
-                Dim op As New BinaryOperator(leftOperand, rightOperand, BinaryOperatorType.Like)
-                group.Operands.Add(op)
-            Next value
-            e.Criteria = group
-        End If
-    End Sub
+			Dim group As New GroupOperator()
+			group.OperatorType = GroupOperatorType.Or
+			For Each value As String In values
+				Dim leftOperand As String = e.Column.FieldName
+				Dim rightOperand As String = String.Format("%{0}%", value)
+				Dim op As New BinaryOperator(leftOperand, rightOperand, BinaryOperatorType.Like)
+				group.Operands.Add(op)
+			Next value
+			e.Criteria = group
+		End If
+	End Sub
 End Class
